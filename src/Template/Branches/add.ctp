@@ -16,13 +16,14 @@
         <legend><?= __('Add Branch') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('registerDate' , ['minYear' => 1990]);
+            echo $this->Form->control('registerDate' , ['minYear' => 1920]);
             echo $this->Form->control('registerNumber');
             echo $this->Form->control('fileNumber');
             echo $this->Form->control('tahunKewangan', ['minYear' => 1990]);
             echo $this->Form->select('status', [
                 'Aktif' => 'Aktif',
-                'Tidak Aktif' => 'Tidak Aktif'
+                'Tidak Aktif' => 'Tidak Aktif',
+                'Dorman' => 'Dorman'
                 ]);
             echo $this->Form->select('wilayah', [
                 'Wilayah 1' => 'Wilayah 1',
