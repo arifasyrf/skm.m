@@ -4,13 +4,13 @@
  * @var \App\Model\Entity\Branch[]|\Cake\Collection\CollectionInterface $branches
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-1 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Branch'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="branches index large-9 medium-8 columns content">
+<div class="branches index large-11 medium-7 columns content">
     <h3><?= __('Branches') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
