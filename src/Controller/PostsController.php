@@ -36,22 +36,6 @@ class PostsController extends AppController
         $this->set('post', $post);
     }
 
-    public function koperasi()
-    {
-        $koperasi = $this->Posts->newEntity();
-        if ($this->request->is('koperasi')) {
-            $koperasi = $this->Posts->patchEntity($koperasi, $this->request->data);
-            if ($this->Posts->save($koperasi)) {
-                $this->Flash->success(__('Your post has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Unable to add your post.'));
-        }
-        $this->set('koperasi', $koperasi);
-    }
-
-
-
     public function edit($id = null)
     {
         $post = $this->Posts->get($id);
