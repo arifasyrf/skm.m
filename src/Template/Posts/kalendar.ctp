@@ -7,10 +7,10 @@
 </head>
 
 <body>
-	<div class="container" max-width="100%">
+	<div class="container-fluid" max-width="100%">
 	<div class="row p-3">
 		<div class="col">
-			<?= $this->Html->image('e_kalendar.png');?>
+			<?= $this->Html->image('e_calendar.png');?>
 			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
 		</div>
 
@@ -58,6 +58,5 @@
 		.no-record{font-size: 16px;font-weight: bold;color: #DD4B39;padding: 10px}
 	</style>
 
-	<?= $this->element('footer') ?>
 </body>
 </html>

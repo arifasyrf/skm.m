@@ -1,3 +1,10 @@
+<?php echo $this->Html->docType();?>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?= $this->element('head') ?>
+</head>
+
 <?php
 /**
  * @var \App\View\AppView $this
@@ -70,3 +77,6 @@
         </tr>
     </table>
 </div>
+
+</body>
+</html>
