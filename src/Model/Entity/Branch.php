@@ -42,5 +42,6 @@ class Branch extends Entity
         'address' => true,
         'created' => true,
         'modified' => true,
+        'phoneNumber' => true,
     ];
 }

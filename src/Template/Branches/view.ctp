@@ -41,6 +41,10 @@
             <td><?= h($branch->address) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('phoneNumber') ?></th>
+            <td><?= h($branch->phoneNumber) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($branch->id) ?></td>
         </tr>

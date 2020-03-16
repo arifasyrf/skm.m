@@ -102,6 +102,11 @@ class BranchesTable extends Table
             ->requirePresence('address', 'create')
             ->notEmptyString('address');
 
+        $validator
+            ->integer('phoneNumber')
+            ->maxLength('phoneNumber', 15)
+            ->allowEmptyString('phoneNumber', null, 'create');
+
         return $validator;
     }
 }

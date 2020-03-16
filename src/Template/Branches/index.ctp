@@ -15,7 +15,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <!--<th scope="col"><?= $this->Paginator->sort('id') ?></th>-->
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('registerDate') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('registerNumber') ?></th>
@@ -25,15 +25,16 @@
                 <th scope="col"><?= $this->Paginator->sort('wilayah') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('tahunBatal') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('address') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('phoneNumber') ?></th>
+                <!--<th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>-->
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($branches as $branch): ?>
             <tr>
-                <td><?= $this->Number->format($branch->id) ?></td>
+                <!--<td><?= $this->Number->format($branch->id) ?></td>-->
                 <td><?= h($branch->name) ?></td>
                 <td><?= h($branch->registerDate) ?></td>
                 <td><?= h($branch->registerNumber) ?></td>
@@ -43,8 +44,10 @@
                 <td><?= h($branch->wilayah) ?></td>
                 <td><?= h($branch->tahunBatal) ?></td>
                 <td><?= h($branch->address) ?></td>
-                <td><?= h($branch->created) ?></td>
-                <td><?= h($branch->modified) ?></td>
+                <td><?= h($branch->phoneNumber) ?></td>
+                <!--<td><?= h($branch->created) ?></td>
+                <td><?= h($branch->modified) ?></td>-->
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $branch->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $branch->id]) ?>

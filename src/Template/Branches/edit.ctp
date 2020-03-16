@@ -30,6 +30,7 @@
             echo $this->Form->control('wilayah');
             echo $this->Form->control('tahunBatal');
             echo $this->Form->control('address');
+            echo $this->Form->control('phoneNumber');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
