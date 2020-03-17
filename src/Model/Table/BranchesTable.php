@@ -103,9 +103,9 @@ class BranchesTable extends Table
             ->notEmptyString('address');
 
         $validator
-            ->integer('phoneNumber')
+            ->scalar('phoneNumber')
             ->maxLength('phoneNumber', 15)
-            ->allowEmptyString('phoneNumber', null, 'create');
+            ->allowEmptyString('phoneNumber', 'create');
 
         return $validator;
     }

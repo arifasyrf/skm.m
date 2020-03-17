@@ -1,7 +1,9 @@
-<hr>
 
+
+<hr>
+  
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin:24px 0;">
-  <a class="navbar-brand" href="http://localhost/skm.m/">HOME</a>
+  <a class="navbar-brand" href="/skm.m/">HOME</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,13 +11,13 @@
   <div class="collapse navbar-collapse" id="navb">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)">Link</a>
+        <a class="nav-link" href="/skm.m/branches">e-Carian</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)">Link</a>
+        <a class="nav-link" href="/skm.m/posts/kalendar">e-Calendar</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
+        <a class="nav-link" href="https://infokop.skm.gov.my/">Infokop</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

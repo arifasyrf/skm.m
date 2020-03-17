@@ -7,10 +7,10 @@
 </head>
 
 <body>
-	<div class="container" max-width="100%">
+	<div class="container-fluid" max-width="100%">
 	<div class="row p-3">
 		<div class="col">
-			<?= $this->Html->image('e_kalendar.png');?>
+			<?= $this->Html->image('e_calendar.png');?>
 			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
 		</div>
 
@@ -20,7 +20,7 @@
 
 	<h1>Perancangan Program</h1>
 	<br>
-	<button type="button" class="btn btn-outline-primary"><?= $this->Html->link('Add New Post', ['action' => 'add']) ?></button>
+	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
 	<div class="row">
 	    <?php if(!empty($posts)): foreach($posts as $post): ?>
 	    <div class="post-box">
@@ -58,6 +58,5 @@
 		.no-record{font-size: 16px;font-weight: bold;color: #DD4B39;padding: 10px}
 	</style>
 
-	<?= $this->element('footer') ?>
 </body>
 </html>

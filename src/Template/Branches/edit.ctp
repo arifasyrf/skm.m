@@ -22,13 +22,22 @@
         <legend><?= __('Edit Branch') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('registerDate');
+            echo $this->Form->control('registerDate' , ['minYear' => 1920]);
             echo $this->Form->control('registerNumber');
             echo $this->Form->control('fileNumber');
-            echo $this->Form->control('tahunKewangan');
-            echo $this->Form->control('status');
-            echo $this->Form->control('wilayah');
-            echo $this->Form->control('tahunBatal');
+            echo $this->Form->control('tahunKewangan', ['minYear' => 1990]);
+            echo $this->Form->select('status', [
+                'Aktif' => 'Aktif',
+                'Tidak Aktif' => 'Tidak Aktif',
+                'Dorman' => 'Dorman'
+            ], ['empty' => '(Status)']);
+            echo $this->Form->select('wilayah', [
+                'Wilayah 1' => 'Wilayah 1',
+                'Wilayah 2' => 'Wilayah 2',
+                'Wilayah 3' => 'Wilayah 3',
+                'Wilayah 4' => 'Wilayah 4'
+            ], ['empty' => '(Wilayah)']);
+            echo $this->Form->control('tahunBatal' , ['minYear' => 1990]);
             echo $this->Form->control('address');
             echo $this->Form->control('phoneNumber');
         ?>
@@ -36,3 +45,5 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+
+
