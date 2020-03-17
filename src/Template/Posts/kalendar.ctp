@@ -20,7 +20,7 @@
 
 	<h1>Perancangan Program</h1>
 	<br>
-	<button type="button" class="btn btn-outline-primary"><?= $this->Html->link('Add New Post', ['action' => 'add']) ?></button>
+	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
 	<div class="row">
 	    <?php if(!empty($posts)): foreach($posts as $post): ?>
 	    <div class="post-box">

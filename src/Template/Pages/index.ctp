@@ -19,10 +19,10 @@
 
 	<div class="row">
 			<div class="col-sm-6 p-3" > <!--style="background-color:yellow;"-->
-				<button type="button" class="btn btn-outline-primary float-right"><?= $this->Html->link('e-Carian', ['controller' => 'branches','action' => 'index']) ?></button>
+				<?= $this->Html->link('e-Carian', ['controller' => 'branches','action' => 'index'], array('class'=>'btn btn-outline-primary float-right')) ?>
 			</div>
       		<div class="col-sm-6 p-3" > <!--style="background-color:orange;"-->
-			  <button type="button" class="btn btn-outline-success"><?= $this->Html->link('e-Calendar', ['controller' => 'posts','action' => 'kalendar']) ?></button>
+			    <?= $this->Html->link('e-Calendar', ['controller' => 'posts','action' => 'kalendar'], array('class'=>'btn btn-outline-success')) ?>
 			  
 			</div>
 
