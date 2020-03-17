@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?= $this->element('head') ?>
 </head>
 
 <?php
@@ -11,7 +10,7 @@
  * @var \App\Model\Entity\Branch $branch
  */
 ?>
-<nav class="large-3 medium-5 columns" id="actions-sidebar">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Branches'), ['action' => 'index']) ?></li>
