@@ -4,9 +4,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $this->element('head') ?>
 
+  	<?= $this->Html->CSS('main.css')?>
+	<?= $this->Html->script('main.js')?>
+
+	
+
 </head>
 
 <body>
+
 	<div class="container-fluid" max-width="100%">
 	<div class="row p-3">
 		<div class="col">
@@ -17,6 +23,24 @@
 	</div>
 
 	<?= $this->element('header') ?>
+
+	<script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+			googleCalendarApiKey: 'keyAIzaSyCigJCoLkQMOfdGD0rd4g3Gkxv_UnIM1kE',
+  		events: {
+    		googleCalendarId: '6hfjdjgtnmjirtn6q002fbshao@group.calendar.google.com'
+  		}
+		  
+        });
+        calendar.render();
+      });
+	  
+	</script>
+	<div id='calendar'></div> <!-- Full calendar -->
+	<iframe src="https://calendar.google.com/calendar/embed?src=6hfjdjgtnmjirtn6q002fbshao%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 	<h1>Perancangan Program</h1>
 	<br>
@@ -42,8 +66,11 @@
 	</div>
 
 	</div>
-
-
+	
+	<!--
+	<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKuala_Lumpur&amp;src=NmhmamRqZ3RubWppcnRuNnEwMDJmYnNoYW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23C0CA33&amp;color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+		<a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=N2duZDRrdGRlNzBzM2V0dWM0amhmZHE3ZGkgYXJpZmFzeXJhZjM2MEBt&amp;tmsrc=arifasyraf360%40gmail.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
+		-->
 	<style type="text/css">
 		h1{color: #494646;}
 		.row{ margin:20px 20px 20px 20px;width: 100%;}
@@ -57,6 +84,7 @@
 		.post-content p {margin: 0 0 10px;}
 		.no-record{font-size: 16px;font-weight: bold;color: #DD4B39;padding: 10px}
 	</style>
-
+<!--Google calendar = keyAIzaSyCigJCoLkQMOfdGD0rd4g3Gkxv_UnIM1kE
+Calendar ID = 6hfjdjgtnmjirtn6q002fbshao@group.calendar.google.com-->
 </body>
 </html>
