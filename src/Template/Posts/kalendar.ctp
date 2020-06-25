@@ -29,10 +29,24 @@
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-			googleCalendarApiKey: 'keyAIzaSyCigJCoLkQMOfdGD0rd4g3Gkxv_UnIM1kE',
-  		events: {
-    		googleCalendarId: '6hfjdjgtnmjirtn6q002fbshao@group.calendar.google.com'
-  		}
+			headerToolbar: {
+				start: 'prevYear,prev,next,nextYear, today',
+				center: 'title',
+				end: 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+			themeSystem: 'bootstrap',
+			height: 650,
+			aspectRatio: 2,
+		  selectable: true,
+		  slectHelper: true,
+		  editable: true,
+		  eventLimit: true
+		  
+		  /*select: function(start, end) {
+			  $.getScript('/event/new', function(){
+				  $('#event_date_range').val(moment(start).format ("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"))
+			  })
+		  }*/
 		  
         });
         calendar.render();
