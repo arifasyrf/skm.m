@@ -43,6 +43,7 @@ use Cake\Mailer\Email;
 use Cake\Mailer\TransportFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\Core\App;
 
 /**
  * Uncomment block of code below if you want to use `.env` file during development.
@@ -191,6 +192,8 @@ Type::build('datetime')
     ->useImmutable();
 Type::build('timestamp')
     ->useImmutable();
+  
+
 
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
@@ -201,3 +204,5 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+$this->addPlugin('FullCalendar', ['autoload' => true, 'bootstrap' => false, 'routes' => true]);
