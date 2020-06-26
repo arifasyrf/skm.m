@@ -207,4 +207,4 @@ Type::build('timestamp')
 
 
 
-    $this->addPlugin('FullCalendar', ['autoload' => true, 'bootstrap' => false, 'routes' => true]);
+   // $this->addPlugin('FullCalendar', ['autoload' => true, 'bootstrap' => false, 'routes' => true]);

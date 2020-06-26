@@ -30,23 +30,72 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
 			headerToolbar: {
-				start: 'prevYear,prev,next,nextYear, today',
+				start: 'prevYear,prev,next,nextYear,today addEventButton',
 				center: 'title',
-				end: 'dayGridMonth,timeGridWeek,timeGridDay'
+				end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 			},
 			themeSystem: 'bootstrap',
-			height: 650,
-			aspectRatio: 2,
-		  selectable: true,
-		  slectHelper: true,
-		  editable: true,
-		  eventLimit: true
+			selectable: true,
+		    slectHelper: true,
+			editable: true,
+		  	eventLimit: true,
+
+			customButtons: {
+				addEventButton: {
+					text: 'Add new event',
+					click: function() {
+					var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+					var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+
+					if (!isNaN(date.valueOf())) { // valid?
+						calendar.addEvent({
+						title: 'dynamic event',
+						start: date,
+						allDay: true
+						});
+						alert('Great. Now, update your database...');
+					} else {
+						alert('Invalid date.');
+					}
+					}
+				}
+			},
+
+			select: function(start, end, allDay)
+			{
+				var title = prompt("Enter Event Title");
+				if(title)
+				{
+					var strat = $.fullCalendar.formatDate(start, "YYYY-MM-DD");
+					var end = $.fullCalendar.formatDate(end, "YYYY-MM-DD");
+					$.ajax({
+						url:"insert.php",
+						type:"POST",
+						data:{title:title, start:start, end:end},
+						success:function()
+						{
+							calendar.fullcalendar('refetchEvents');
+							alert("Added Successfully");
+						}
+					})
+				}
+			}
+			
+			//height: 650,
+			//width: 500,
+			//aspectRatio: 1.7,
+			//contentHeight: 600,
 		  
+		  
+		
 		  /*select: function(start, end) {
 			  $.getScript('/event/new', function(){
 				  $('#event_date_range').val(moment(start).format ("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"))
 			  })
-		  }*/
+		  }
+		  select: function(info) {
+      		alert('selected ' + info.startStr + ' to ' + info.endStr);
+    		}*/
 		  
         });
         calendar.render();
