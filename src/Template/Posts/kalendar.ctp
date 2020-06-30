@@ -24,21 +24,26 @@
 
 	<?= $this->element('header') ?>
 
+	<div id='calendar'></div> <!-- Full calendar -->
+	<!--<iframe src="https://calendar.google.com/calendar/embed?src=6hfjdjgtnmjirtn6q002fbshao%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
+
+	<h1>Perancangan Program</h1>
+	<br>
+
 	<script>
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+		document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			
+			editable: true,
 			headerToolbar: {
 				start: 'prevYear,prev,next,nextYear,today addEventButton',
 				center: 'title',
 				end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 			},
 			themeSystem: 'bootstrap',
-			selectable: true,
-		    slectHelper: true,
-			editable: true,
-		  	eventLimit: true,
+			eventLimit: true,
 
 			customButtons: {
 				addEventButton: {
@@ -61,15 +66,19 @@
 				}
 			},
 
+			events: 'load.php',
+			selectable: true,
+			slectHelper: true,
+
 			select: function(start, end, allDay)
 			{
 				var title = prompt("Enter Event Title");
 				if(title)
 				{
-					var strat = $.fullCalendar.formatDate(start, "YYYY-MM-DD");
-					var end = $.fullCalendar.formatDate(end, "YYYY-MM-DD");
+					var strat = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+					var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 					$.ajax({
-						url:"insert.php",
+						url:"<? echo $this->Html->link('src\Template\Posts\insert.php') ?>",
 						type:"POST",
 						data:{title:title, start:start, end:end},
 						success:function()
@@ -79,34 +88,48 @@
 						}
 					})
 				}
-			}
+			},
+
+			editable:true,
+			eventResize:function(event)
+			{
+				var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+				var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+				var title = event.title;
+				var id = event.id;
+			$.ajax({
+				url:"update.php",
+				type:"POST",
+				data:{title:title, start:start, end:end, id:id},
+			success:function(){
+				calendar.fullCalendar('refetchEvents');
+				alert('Event Update');
+				}
+				})
+			},
 			
 			//height: 650,
 			//width: 500,
 			//aspectRatio: 1.7,
 			//contentHeight: 600,
-		  
-		  
+			
+			
 		
-		  /*select: function(start, end) {
-			  $.getScript('/event/new', function(){
-				  $('#event_date_range').val(moment(start).format ("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"))
-			  })
-		  }
-		  select: function(info) {
-      		alert('selected ' + info.startStr + ' to ' + info.endStr);
-    		}*/
-		  
-        });
-        calendar.render();
-      });
-	  
-	</script>
-	<div id='calendar'></div> <!-- Full calendar -->
-	<iframe src="https://calendar.google.com/calendar/embed?src=6hfjdjgtnmjirtn6q002fbshao%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+			/*select: function(start, end) {
+				$.getScript('/event/new', function(){
+					$('#event_date_range').val(moment(start).format ("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"))
+				})
+			}
+			select: function(info) {
+				alert('selected ' + info.startStr + ' to ' + info.endStr);
+			}*/
+			
+		});
+		calendar.render();
+		});
 
-	<h1>Perancangan Program</h1>
-	<br>
+	</script>
+
 	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
 	<div class="row">
 	    <?php if(!empty($posts)): foreach($posts as $post): ?>

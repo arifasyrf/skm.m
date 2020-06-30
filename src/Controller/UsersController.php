@@ -12,6 +12,32 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    public function login()
+    {
+        $result = $this->Authentication->getResult();
+    // If the user is logged in send them away.
+    if ($result->isValid()) {
+        $target = $this->Authentication->getLoginRedirect() ?? '/index';
+        return $this->redirect($target);
+    }
+    if ($this->request->is('post') && !$result->isValid()) {
+        $this->Flash->error('Invalid username or password');
+    }
+
+        /* $this->viewBuilder()->setLayout('login');
+        if ($this->request->is(['post'])) 
+        {
+            $user = $this->Auth->identify();
+            $this->Auth->setUser($user);
+            // $this->redirect(['action'=>'index']);
+        } */
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
     /**
      * Index method
      *
