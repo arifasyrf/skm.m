@@ -16,7 +16,18 @@ class UsersController extends AppController
     {
         $this->viewBuilder()->setLayout('login');
 
-        if ($this->request->is('post')) {
+        $result = $this->Authentication->getResult();
+        // If the user is logged in send them away.
+        if ($result->isValid()) {
+            return $this->redirect('/');
+            // $target = $this->Authentication->loginRedirect('/') ?? '/home';
+            // return $this->redirect($target);
+        }
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error('Invalid username or password');
+        } 
+
+        /* if ($this->request->is('post')) {
          
             if($this->Auth->user('id')){
             $this->Flash->error(__('You are already logged in!'));
@@ -35,7 +46,7 @@ class UsersController extends AppController
             }
             $this->Flash->error('Your username or password is incorrect.');
           }
-       } 
+       } */ 
 
         /* if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -47,16 +58,6 @@ class UsersController extends AppController
             }
         } */
 
-        /* $result = $this->Authentication->getResult();
-    // If the user is logged in send them away.
-    if ($result->isValid()) {
-        $target = $this->Authentication->getLoginRedirect() ?? '/index';
-        return $this->redirect($target);
-    }
-    if ($this->request->is('post') && !$result->isValid()) {
-        $this->Flash->error('Invalid username or password');
-    } */
-
          /* $this->viewBuilder()->setLayout('login');
         if ($this->request->is(['post'])) 
         {
@@ -67,10 +68,23 @@ class UsersController extends AppController
         }   */
     }
 
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->Authentication->allowUnauthenticated(['login', 'logout']);
+    }
+
     public function logout()
     {
-        return $this->redirect($this->Auth->logout());
+        $this->Authentication->logout();
+        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
+
+    /* public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    } */
 
     /**
      * Index method

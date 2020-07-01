@@ -20,6 +20,11 @@ use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Application setup class.
@@ -27,7 +32,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * {@inheritDoc}
@@ -38,6 +43,8 @@ class Application extends BaseApplication
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
+        //Plugin::load('Authentication');
+        $this->addPlugin('Authentication');
 
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
@@ -55,6 +62,40 @@ class Application extends BaseApplication
     }
 
     /**
+     * Returns a service provider instance.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @param \Psr\Http\Message\ResponseInterface $response Response
+     * @return \Authentication\AuthenticationServiceInterface
+     */
+    public function getAuthenticationService(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $service = new AuthenticationService();
+        $service->setConfig([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
+
+        $fields = [
+            'username' => 'username',
+            'password' => 'password'
+        ];
+
+        // Load identifiers
+        $service->loadIdentifier('Authentication.Password', compact('fields'));
+
+        // Load the authenticators, you want session first
+        $service->loadAuthenticator('Authentication.Session');
+        $service->loadAuthenticator('Authentication.Form', [
+            'fields' => $fields,
+            'loginUrl' => '/users/login'
+        ]);
+
+        return $service;
+    }
+
+
+    /**
      * Setup the middleware queue your application will use.
      *
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
@@ -62,6 +103,10 @@ class Application extends BaseApplication
      */
     public function middleware($middlewareQueue)
     {
+        // Various other middlewares for error handling, routing etc. added here.
+        // Create an authentication middleware object
+        $authentication = new AuthenticationMiddleware($this);
+
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
@@ -78,7 +123,12 @@ class Application extends BaseApplication
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this));
+            ->add(new RoutingMiddleware($this))
+
+            // Add the middleware to the middleware queue.
+            // Authentication should be added *after* RoutingMiddleware.
+            // So that subdirectory information and routes are loaded.
+            ->add($authentication);
 
         return $middlewareQueue;
     }
