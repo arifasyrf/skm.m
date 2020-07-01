@@ -14,7 +14,40 @@ class UsersController extends AppController
 {
     public function login()
     {
-        $result = $this->Authentication->getResult();
+        $this->viewBuilder()->setLayout('login');
+
+        if ($this->request->is('post')) {
+         
+            if($this->Auth->user('id')){
+            $this->Flash->error(__('You are already logged in!'));
+            return $this->redirect($this->Auth->redirectUrl());
+            //return $this->redirect(['action'=>'index']);
+        }
+        else{
+            
+            $user = $this->Auth->identify();
+            //debug($user);
+            if ($user) {
+                $this->Auth->setUser($user);
+                $this->Flash->success(__('Login successful!'));
+                return $this->redirect($this->Auth->redirectUrl());
+                //return $this->redirect(['action'=>'index']);
+            }
+            $this->Flash->error('Your username or password is incorrect.');
+          }
+       } 
+
+        /* if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl('google.com'));
+            } else {
+                $this->Flash->error(__('Username or password is incorrect'));
+            }
+        } */
+
+        /* $result = $this->Authentication->getResult();
     // If the user is logged in send them away.
     if ($result->isValid()) {
         $target = $this->Authentication->getLoginRedirect() ?? '/index';
@@ -22,15 +55,16 @@ class UsersController extends AppController
     }
     if ($this->request->is('post') && !$result->isValid()) {
         $this->Flash->error('Invalid username or password');
-    }
+    } */
 
-        /* $this->viewBuilder()->setLayout('login');
+         /* $this->viewBuilder()->setLayout('login');
         if ($this->request->is(['post'])) 
         {
             $user = $this->Auth->identify();
+            //debug($user);
             $this->Auth->setUser($user);
-            // $this->redirect(['action'=>'index']);
-        } */
+            $this->redirect(['controller'=>'Users', 'action'=>'index']);
+        }   */
     }
 
     public function logout()

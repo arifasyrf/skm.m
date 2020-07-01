@@ -46,6 +46,9 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
         $this->loadComponent('Auth');
+        /* $this->loadComponent('Authentication.Authentication', [
+            'logoutRedirect' => '/users/login'  // Default is false
+        ]); */
 
         /*
          * Enable the following component for recommended CakePHP security settings.
