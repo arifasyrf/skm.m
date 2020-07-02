@@ -46,7 +46,9 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
         //$this->loadComponent('Auth');
-        $this->loadComponent('Authentication.Authentication');
+        $this->loadComponent('Authentication.Authentication', [
+            'logoutRedirect' => '/users/login'  // Default is false
+        ]);
         
         // in a controller beforeFilter or initialize
         // Make view and index not require a logged in user.

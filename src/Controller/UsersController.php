@@ -14,17 +14,18 @@ class UsersController extends AppController
 {
     public function login()
     {
-        $this->viewBuilder()->setLayout('login');
+        //$this->viewBuilder()->setLayout('login');
 
         $result = $this->Authentication->getResult();
         // If the user is logged in send them away.
         if ($result->isValid()) {
+            $this->Flash->success(__('Login successful!'));
             return $this->redirect('/');
             // $target = $this->Authentication->loginRedirect('/') ?? '/home';
             // return $this->redirect($target);
         }
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error('Invalid username or password');
+            $this->Flash->error(__('Invalid username or password'));
         } 
 
         /* if ($this->request->is('post')) {
@@ -78,6 +79,7 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Authentication->logout();
+        $this->Flash->success(__('Logout successful!'));
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 

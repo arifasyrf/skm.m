@@ -20,6 +20,11 @@ $cakeDescription = 'Suruhanjaya Koperasi Malaysia Cawangan Negeri Melaka';
 echo $this->fetch('meta');
 echo $this->fetch('css');
 echo $this->fetch('script');
+// Only this is necessary after 3.4.0
+echo $this->Flash->render();
+
+// Prior to 3.4.0 this will be required as well.
+echo $this->Flash->render('auth');
 ?>
 </head>
 <body>
