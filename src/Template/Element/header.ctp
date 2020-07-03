@@ -1,5 +1,6 @@
 
-
+<?php echo $this->Html->docType();?>
+<html>
 <hr>
   
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin:24px 0;">
@@ -20,9 +21,15 @@
         <a class="nav-link" href="https://infokop.skm.gov.my/">Infokop</a>
       </li>
     </ul>
+    <a class="navbar-brand" href="/skm.m/users/login">LOGIN</a>
+    <?=
+      $this->Html->link('Logout', ['controller'=>'users', 'action'=>'logout'], 
+    array('class'=>'btn btn-default'));
+    ?>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Cari Koperasi">
       <button class="btn btn-primary my-2 my-sm-0" type="button"><i class="fa fa-search"></i></button>
     </form>
   </div>
 </nav>
+</html>

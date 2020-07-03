@@ -24,9 +24,11 @@ class UsersController extends AppController
             // $target = $this->Authentication->loginRedirect('/') ?? '/home';
             // return $this->redirect($target);
         }
+        
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid username or password'));
-        } 
+        }
+        
 
         /* if ($this->request->is('post')) {
          
@@ -80,7 +82,8 @@ class UsersController extends AppController
     {
         $this->Authentication->logout();
         $this->Flash->success(__('Logout successful!'));
-        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        return $this->redirect('/');
+        //return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /* public function logout()
