@@ -41,13 +41,7 @@ show up on all of your views, include it here -->
 
 <!-- Add a footer to each displayed page -->
 <div id="footer">
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <p>Copyright &copy; Suruhanjaya Koperasi Malaysia Cawangan Negeri Melaka 2020</p>
-        </div>
-    </div>
-</footer>
+<?= $this->element('footer') ?>
 </div>
 
 </body>

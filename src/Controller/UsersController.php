@@ -24,21 +24,21 @@ class UsersController extends AppController
             // $target = $this->Authentication->loginRedirect('/') ?? '/home';
             // return $this->redirect($target);
         }
-        
+
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid username or password'));
         }
-        
+
 
         /* if ($this->request->is('post')) {
-         
+
             if($this->Auth->user('id')){
             $this->Flash->error(__('You are already logged in!'));
             return $this->redirect($this->Auth->redirectUrl());
             //return $this->redirect(['action'=>'index']);
         }
         else{
-            
+
             $user = $this->Auth->identify();
             //debug($user);
             if ($user) {
@@ -49,7 +49,7 @@ class UsersController extends AppController
             }
             $this->Flash->error('Your username or password is incorrect.');
           }
-       } */ 
+       } */
 
         /* if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -62,7 +62,7 @@ class UsersController extends AppController
         } */
 
          /* $this->viewBuilder()->setLayout('login');
-        if ($this->request->is(['post'])) 
+        if ($this->request->is(['post']))
         {
             $user = $this->Auth->identify();
             //debug($user);
@@ -71,11 +71,11 @@ class UsersController extends AppController
         }   */
     }
 
-    public function beforeFilter(\Cake\Event\EventInterface $event)
+    public function beforeFilter(\Cake\Event\Event $event)
     {
         parent::beforeFilter($event);
 
-        $this->Authentication->allowUnauthenticated(['login', 'logout']);
+        $this->Authentication->allowUnauthenticated(['login', 'logout' , 'add']);
     }
 
     public function logout()
@@ -132,7 +132,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'login']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
