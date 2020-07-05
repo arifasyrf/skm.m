@@ -90,6 +90,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             'fields' => $fields,
             'loginUrl' => '/users/login'
         ]);
+        //$service->loadAuthenticator('Authentication.HttpBasic');
 
         return $service;
     }

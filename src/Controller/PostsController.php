@@ -61,6 +61,40 @@ class PostsController extends AppController
             return $this->redirect(['action' => 'kalendar']);
         }
     }
-    
+
+    public function load(){
+        $this->loadModel('Events');
+
+        $events = $this->Events->find();
+
+        foreach($events as $result){
+            foreach($result as $row)
+            {
+            $data[] = array(
+            'id'   => $row["id"],
+            'title'   => $row["title"],
+            'start'   => $row["start"],
+            'end'   => $row["end"],
+            );
+            }
+        }
+
+
+        echo json_encode($data);
+    }
+
+    public function saveEvent(){
+        $this->loadModel('Events');
+        if ($this->request->is(['post','put'])) {
+            $data = $this->request->data;
+
+            $event = $this->Events->newEntity();
+            $event = $this->Events->patchEntity($event, $data);
+            $this->Events->save($event);
+
+            pr($data);
+        }
+        exit;
+    }
 }
 

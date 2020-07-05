@@ -21,8 +21,6 @@ class UsersController extends AppController
         if ($result->isValid()) {
             $this->Flash->success(__('Login successful!'));
             return $this->redirect('/');
-            // $target = $this->Authentication->loginRedirect('/') ?? '/home';
-            // return $this->redirect($target);
         }
 
         if ($this->request->is('post') && !$result->isValid()) {

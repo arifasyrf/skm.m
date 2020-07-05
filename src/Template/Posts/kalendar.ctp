@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $this->element('head') ?>
-
   	<?= $this->Html->CSS('main.css')?>
 	<?= $this->Html->script('main.js')?>
 
-	
+
+
 
 </head>
 
@@ -31,11 +32,12 @@
 	<br>
 
 	<script>
+    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
 
 		document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			
+
 			editable: true,
 			headerToolbar: {
 				start: 'prevYear,prev,next,nextYear,today addEventButton',
@@ -51,6 +53,7 @@
 					click: function() {
 					var dateStr = prompt('Enter a date in YYYY-MM-DD format');
 					var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                    var newDate = date.toISOString().slice(0, 19).replace('T', ' ');
 
 					if (!isNaN(date.valueOf())) { // valid?
 						calendar.addEvent({
@@ -58,7 +61,25 @@
 						start: date,
 						allDay: true
 						});
-						alert('Great. Now, update your database...');
+
+
+                        $.ajax({
+                        headers: {
+                            'X-CSRF-Token': csrfToken
+                        },
+						url:'<?= $this->Url->build(["controller" => "Posts", "action" => "save-event"])?>',
+						type:"POST",
+						data:{start:newDate},
+						success:function()
+						{
+							calendar.fullcalendar('refetchEvents');
+							alert("Added Event Successfully");
+						}
+					})
+
+
+
+
 					} else {
 						alert('Invalid date.');
 					}
@@ -66,7 +87,7 @@
 				}
 			},
 
-			events: 'load.php',
+			//events: 'load',
 			selectable: true,
 			slectHelper: true,
 
@@ -77,6 +98,8 @@
 				{
 					var strat = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
 					var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+
+                    console.log('whattt');
 					$.ajax({
 						url:"<? echo $this->Html->link('src\Template\Posts\insert.php') ?>",
 						type:"POST",
@@ -107,14 +130,14 @@
 				}
 				})
 			},
-			
+
 			//height: 650,
 			//width: 500,
 			//aspectRatio: 1.7,
 			//contentHeight: 600,
-			
-			
-		
+
+
+
 			/*select: function(start, end) {
 				$.getScript('/event/new', function(){
 					$('#event_date_range').val(moment(start).format ("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"))
@@ -123,7 +146,7 @@
 			select: function(info) {
 				alert('selected ' + info.startStr + ' to ' + info.endStr);
 			}*/
-			
+
 		});
 		calendar.render();
 		});
@@ -152,7 +175,7 @@
 	</div>
 
 	</div>
-	
+
 	<!--
 	<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKuala_Lumpur&amp;src=NmhmamRqZ3RubWppcnRuNnEwMDJmYnNoYW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23C0CA33&amp;color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 		<a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=N2duZDRrdGRlNzBzM2V0dWM0amhmZHE3ZGkgYXJpZmFzeXJhZjM2MEBt&amp;tmsrc=arifasyraf360%40gmail.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
