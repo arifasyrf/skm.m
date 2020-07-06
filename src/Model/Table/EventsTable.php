@@ -41,8 +41,8 @@ class EventsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('EventTypes', [
-            'foreignKey' => 'event_type_id',
-            'joinType' => 'INNER',
+            //'foreignKey' => 'event_type_id',
+            // 'joinType' => 'INNER',
         ]);
     }
 
@@ -104,8 +104,8 @@ class EventsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['event_type_id'], 'EventTypes'));
+        // $rules->add($rules->existsIn(['event_type_id'], 'EventTypes'));
 
-        return $rules;
+        // return $rules;
     }
 }

@@ -92,7 +92,7 @@ class PostsController extends AppController
             $event = $this->Events->patchEntity($event, $data);
             $this->Events->save($event);
 
-            pr($data);
+            pr($event);
         }
         exit;
     }

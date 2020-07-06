@@ -26,11 +26,8 @@ table tr td:first-child::before {
 }
 </style>
 
-<div class="row p-3">
-		<div class="col">
+<div class="container-fluid pt-3" max-width="100%">
 			<?= $this->Html->image('e_carian.png');?>
-		</div>
-
 	</div>
 
 

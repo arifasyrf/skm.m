@@ -3,25 +3,19 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+	  
   <?= $this->element('head') ?>
   	<?= $this->Html->CSS('main.css')?>
 	<?= $this->Html->script('main.js')?>
-
-
-
 
 </head>
 
 <body>
 
-	<div class="container-fluid" max-width="100%">
-	<div class="row p-3">
-		<div class="col">
+	<div class="container-fluid pt-3" max-width="100%">
 			<?= $this->Html->image('e_calendar.png');?>
 			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
-		</div>
-
-	</div>
+		
 
 	<?= $this->element('header') ?>
 
@@ -61,7 +55,7 @@
 						start: date,
 						allDay: true
 						});
-
+						alert(newDate);
 
                         $.ajax({
                         headers: {
@@ -72,14 +66,10 @@
 						data:{start:newDate},
 						success:function()
 						{
-							calendar.fullcalendar('refetchEvents');
+							calendar.refetchEvents();
 							alert("Added Event Successfully");
 						}
 					})
-
-
-
-
 					} else {
 						alert('Invalid date.');
 					}
@@ -153,6 +143,11 @@
 
 	</script>
 
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+  </button>
+
 	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
 	<div class="row">
 	    <?php if(!empty($posts)): foreach($posts as $post): ?>
@@ -175,6 +170,60 @@
 	</div>
 
 	</div>
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Create New Event</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+		  <div class="container">
+			<h2></h2>
+			<form action="/action_page.php">
+				<div class="form-group">
+				<label for="email">Program</label>
+				<input type="email" class="form-control" id="email" placeholder="Masukkan nama program" name="email">
+				</div>
+				<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+				</div>
+				<div class="input-daterange input-group" id="datepicker">
+					<input type="text" class="input-sm form-control" placeholder="Start Event" name="start" />
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" placeholder="End Event" name="end" />
+				</div>
+				<div class="form-group form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" type="checkbox" name="remember"> Remember me
+				</label>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			</div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  	<script>
+	$('#sandbox-container .input-daterange').datepicker({
+	});
+	</script>
 
 	<!--
 	<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKuala_Lumpur&amp;src=NmhmamRqZ3RubWppcnRuNnEwMDJmYnNoYW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23C0CA33&amp;color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
