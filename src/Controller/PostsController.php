@@ -85,15 +85,14 @@ class PostsController extends AppController
 
     public function saveEvent(){
         $this->loadModel('Events');
-        if ($this->request->is(['post','put'])) {
-            $data = $this->request->data;
-
-            $event = $this->Events->newEntity();
-            $event = $this->Events->patchEntity($event, $data);
-            $this->Events->save($event);
-
-            pr($event);
-        }
+        $data = $this->request->getQuery();
+        // pr($data['start']);
+        // pr($data['end']);
+        //exit;
+        $event = $this->Events->newEntity();
+        $event = $this->Events->patchEntity($event, $data);
+        //pr($event);exit;
+        $this->Events->save($event);
         exit;
     }
 }

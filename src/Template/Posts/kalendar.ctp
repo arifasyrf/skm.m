@@ -3,7 +3,7 @@
 <head>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	  
+
   	<?= $this->element('head') ?>
   	<?= $this->Html->CSS('https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css')?>
 	<?= $this->Html->script('https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js')?>
@@ -18,13 +18,12 @@
 	<div class="container-fluid pt-3" max-width="100%">
 			<?= $this->Html->image('e_calendar.png');?>
 			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
-			
-		
+
+
 
 	<?= $this->element('header') ?>
 
 	<div id='calendar'></div> <!-- Full calendar -->
-	<!--<iframe src="https://calendar.google.com/calendar/embed?src=6hfjdjgtnmjirtn6q002fbshao%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
 
 	<h1>Perancangan Program</h1>
 	<br>
@@ -49,9 +48,13 @@
 				addEventButton: {
 					text: 'Add new event',
 					click: function() {
-					var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-					var date = new Date(dateStr + 'T00:00:00'); // will be in local time
-                    var newDate = date.toISOString().slice(0, 19).replace('T', ' ');
+
+                    $('#myModal').modal('show');
+					// var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+					// var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                    // var newDate = date.toISOString().slice(0, 19).replace('T', ' ');
+                    var title = 'Cuti hujung minggu';
+                    var detail = 'Pi melancong pulau tioman';
 
 					if (!isNaN(date.valueOf())) { // valid?
 						calendar.addEvent({
@@ -65,15 +68,14 @@
                         headers: {
                             'X-CSRF-Token': csrfToken
                         },
-						url:'<?= $this->Url->build(["controller" => "Posts", "action" => "save-event"])?>',
-						type:"POST",
-						data:{start:newDate},
+						url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>'+'?start='+newDate+'&end='+newDate+'&title='+title+'&details='+detail,
+						type:'POST',
 						success:function()
 						{
-							calendar.refetchEvents();
-							alert("Added Event Successfully");
+							// calendar.refetchEvents();
+							// alert("Added Event Successfully");
 						}
-					})
+					    })
 					} else {
 						alert('Invalid date.');
 					}
@@ -125,25 +127,25 @@
 				})
 			},
 
-			//height: 650,
-			//width: 500,
-			//aspectRatio: 1.7,
-			//contentHeight: 600,
-
-
-
-			/*select: function(start, end) {
-				$.getScript('/event/new', function(){
-					$('#event_date_range').val(moment(start).format ("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"))
-				})
-			}
-			select: function(info) {
-				alert('selected ' + info.startStr + ' to ' + info.endStr);
-			}*/
-
 		});
 		calendar.render();
 		});
+
+        $( document ).ready(function() {
+            $("#submit-modal").click(function(){
+                var tajuk = $('#tajuk').val();
+                var datePicker7 = $('#tarikh-mula').val();
+                var datePicker8 = $('#tarikh-akhir').val();
+                var selection = $('#sel1').val();
+                var urusetia = $('#urusetia').val();
+
+                console.log(tajuk);
+                console.log(datePicker7);
+                console.log(datePicker8);
+                console.log(selection);
+                console.log(urusetia);
+            });
+        });
 
 	</script>
 
@@ -180,18 +182,17 @@
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Create New Event</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
 		  <div class="container">
 			<h2></h2>
-			<form action="/action_page.php">
 				<div class="form-group">
 				<label for="text">Program</label>
 				<input type="text" class="form-control" id="tajuk" placeholder="Masukkan nama program" name="tajuk">
@@ -201,7 +202,7 @@
 				<label for="text">Tarikh</label>
 				<br>Mula
 				<div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-						<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+						<input type="text" id="tarikh-mula" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
 						<div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
 							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 						</div>
@@ -209,7 +210,7 @@
 				</div>Hingga
 				<div class="form-group">
 				<div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-						<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+						<input type="text" id="tarikh-akhir" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
 						<div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
 							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 						</div>
@@ -241,7 +242,7 @@
 				$('.input-daterange input').each(function() {
 					$(this).datepicker('clearDates');
 					clearBtn: true
-					
+
 				});
 				</script> -->
 
@@ -253,7 +254,7 @@
 						<option>Audit</option>
 						<option>Operasi</option>
 					</select>
-				</div>	
+				</div>
 
 				<div class="form-group">
 					<label for="text">Urusetia</label>
@@ -265,25 +266,20 @@
 				<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
 				</div> -->
 				<div> </div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
+				<button type="submit" id="submit-modal" class="btn btn-primary">Submit</button>
 			</div>
 
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
 
-	<!--
-	<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKuala_Lumpur&amp;src=NmhmamRqZ3RubWppcnRuNnEwMDJmYnNoYW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23C0CA33&amp;color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-		<a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=N2duZDRrdGRlNzBzM2V0dWM0amhmZHE3ZGkgYXJpZmFzeXJhZjM2MEBt&amp;tmsrc=arifasyraf360%40gmail.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
-		-->
 	<style type="text/css">
 		h1{color: #494646;}
 		.row{ margin:20px 20px 20px 20px;width: 100%;}
@@ -297,7 +293,6 @@
 		.post-content p {margin: 0 0 10px;}
 		.no-record{font-size: 16px;font-weight: bold;color: #DD4B39;padding: 10px}
 	</style>
-<!--Google calendar = keyAIzaSyCigJCoLkQMOfdGD0rd4g3Gkxv_UnIM1kE
-Calendar ID = 6hfjdjgtnmjirtn6q002fbshao@group.calendar.google.com-->
+
 </body>
 </html>
