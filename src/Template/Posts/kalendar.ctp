@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	  
-  <?= $this->element('head') ?>
-  	<?= $this->Html->CSS('main.css')?>
-	<?= $this->Html->script('main.js')?>
+  	<?= $this->element('head') ?>
+  	<?= $this->Html->CSS('https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css')?>
+	<?= $this->Html->script('https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js')?>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 
 </head>
 
@@ -15,6 +18,7 @@
 	<div class="container-fluid pt-3" max-width="100%">
 			<?= $this->Html->image('e_calendar.png');?>
 			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
+			
 		
 
 	<?= $this->element('header') ?>
@@ -26,7 +30,7 @@
 	<br>
 
 	<script>
-    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')); ?>
 
 		document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -39,7 +43,7 @@
 				end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 			},
 			themeSystem: 'bootstrap',
-			eventLimit: true,
+			//eventLimit: true,
 
 			customButtons: {
 				addEventButton: {
@@ -79,7 +83,7 @@
 
 			//events: 'load',
 			selectable: true,
-			slectHelper: true,
+			//slectHelper: true,
 
 			select: function(start, end, allDay)
 			{
@@ -189,26 +193,82 @@
 			<h2></h2>
 			<form action="/action_page.php">
 				<div class="form-group">
-				<label for="email">Program</label>
-				<input type="email" class="form-control" id="email" placeholder="Masukkan nama program" name="email">
+				<label for="text">Program</label>
+				<input type="text" class="form-control" id="tajuk" placeholder="Masukkan nama program" name="tajuk">
 				</div>
+			<!-- Date Time picker -->
 				<div class="form-group">
+				<label for="text">Tarikh</label>
+				<br>Mula
+				<div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+						<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+						<div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+						</div>
+					</div>
+				</div>Hingga
+				<div class="form-group">
+				<div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+						<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+						<div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+						</div>
+					</div>
+			</div>
+			<script type="text/javascript">
+				$(function () {
+					$('#datetimepicker7').datetimepicker();
+					$('#datetimepicker8').datetimepicker({
+						useCurrent: false
+					});
+					$("#datetimepicker7").on("change.datetimepicker", function (e) {
+						$('#datetimepicker8').datetimepicker('minDate', e.date);
+					});
+					$("#datetimepicker8").on("change.datetimepicker", function (e) {
+						$('#datetimepicker7').datetimepicker('maxDate', e.date);
+					});
+				});
+			</script>
+
+				<!-- Date Picker -->
+				<!-- <div class="form-group input-group input-daterange">
+				<label for="text">Tarikh</label>
+					<input type="text" class="form-control">
+					<div class="input-group-addon">to</div>
+					<input type="text" class="form-control">
+				</div>
+				<script>
+				$('.input-daterange input').each(function() {
+					$(this).datepicker('clearDates');
+					clearBtn: true
+					
+				});
+				</script> -->
+
+				<div class="form-group">
+					<label for="sel1">Unit terlibat:</label>
+					<select class="form-control" id="sel1" name="sellist1">
+						<option>Pentadbiran</option>
+						<option>Pembangunan</option>
+						<option>Audit</option>
+						<option>Operasi</option>
+					</select>
+				</div>	
+
+				<div class="form-group">
+					<label for="text">Urusetia</label>
+					<input type="text" class="form-control" id="urusetia" placeholder="Nama urusetia" name="tajuk">
+				</div>
+
+				<!-- <div class="form-group">
 				<label for="pwd">Password:</label>
 				<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-				</div>
-				<div class="input-daterange input-group" id="datepicker">
-					<input type="text" class="input-sm form-control" placeholder="Start Event" name="start" />
-					<span class="input-group-addon">to</span>
-					<input type="text" class="input-sm form-control" placeholder="End Event" name="end" />
-				</div>
-				<div class="form-group form-check">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" name="remember"> Remember me
-				</label>
-				</div>
+				</div> -->
+				<div> </div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 			</div>
+
         </div>
         
         <!-- Modal footer -->
@@ -219,11 +279,6 @@
       </div>
     </div>
   </div>
-
-  	<script>
-	$('#sandbox-container .input-daterange').datepicker({
-	});
-	</script>
 
 	<!--
 	<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKuala_Lumpur&amp;src=NmhmamRqZ3RubWppcnRuNnEwMDJmYnNoYW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23C0CA33&amp;color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>

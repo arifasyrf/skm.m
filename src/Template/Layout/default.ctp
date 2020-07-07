@@ -14,7 +14,7 @@ $cakeDescription = 'Suruhanjaya Koperasi Malaysia Cawangan Negeri Melaka';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    <!-- <?= $this->Html->css('style.css') ?> -->
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
 <?php
 echo $this->fetch('meta');
