@@ -7,14 +7,16 @@ use Cake\ORM\Entity;
  * Event Entity
  *
  * @property int $id
- * @property int $event_type_id
- * @property string $title
- * @property string $details
- * @property \Cake\I18n\FrozenTime $start
- * @property \Cake\I18n\FrozenTime $end
+ * @property int|null $event_type_id
+ * @property string|null $title
+ * @property string|null $details
+ * @property \Cake\I18n\FrozenTime|null $start
+ * @property \Cake\I18n\FrozenTime|null $end
  * @property bool $all_day
  * @property string $status
  * @property bool $active
+ * @property string|null $unit_terlibat
+ * @property string|null $urusetia
  * @property \Cake\I18n\FrozenDate|null $created
  * @property \Cake\I18n\FrozenDate|null $modified
  *
@@ -40,6 +42,8 @@ class Event extends Entity
         'all_day' => true,
         'status' => true,
         'active' => true,
+        'unit_terlibat' => true,
+        'urusetia' => true,
         'created' => true,
         'modified' => true,
         'event_type' => true,

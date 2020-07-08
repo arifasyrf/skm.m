@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   	<?= $this->element('head') ?>
@@ -20,13 +19,34 @@
 			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
 
 
-
 	<?= $this->element('header') ?>
-
-	<div id='calendar'></div> <!-- Full calendar -->
-
 	<h1>Perancangan Program</h1>
 	<br>
+
+	<div id='calendar'></div> <!-- Full calendar -->
+	<br>
+	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
+	<div class="row">
+	    <?php if(!empty($posts)): foreach($posts as $post): ?>
+	    <div class="post-box">
+	        <div class="post-content">
+	            <div class="caption">
+	            	<?= $this->Html->link('Edit', ['action' => 'edit', $post->id]) ?>
+
+	            	<?= $this->Form->postLink('Delete',['action' => 'delete', $post->id],
+								    ['confirm' => 'Are you sure?'])?>
+	                <h4><a href="javascript:void(0);"><?php echo $post->title; ?></a></h4>
+	                <p><?php echo $post->description; ?></p>
+	                <p><?php echo $post->tarikh; ?></p>
+	            </div>
+	        </div>
+	    </div>
+	    <?php endforeach; else: ?>
+	    <p class="no-record">No post(s) found......</p>
+	    <?php endif; ?>
+	</div>
+
+	</div>
 
 	<script>
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')); ?>
@@ -49,37 +69,39 @@
 					text: 'Add new event',
 					click: function() {
 
-                    $('#myModal').modal('show');
-					// var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-					// var date = new Date(dateStr + 'T00:00:00'); // will be in local time
-                    // var newDate = date.toISOString().slice(0, 19).replace('T', ' ');
-                    var title = 'Cuti hujung minggu';
-                    var detail = 'Pi melancong pulau tioman';
+						$('#myModal').modal('show');
+						// var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+						// var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+						// var newDate = date.toISOString().slice(0, 19).replace('T', ' ');
+						var title = 'Cuti hujung minggu';
+						var detail = 'Pi melancong pulau tioman';
 
-					if (!isNaN(date.valueOf())) { // valid?
-						calendar.addEvent({
-						title: 'dynamic event',
-						start: date,
-						allDay: true
-						});
-						alert(newDate);
+						if (!isNaN(date.valueOf())) { // valid?
+							calendar.addEvent({
+							title: 'dynamic event',
+							start: date,
+							allDay: true
+							});
+							alert(newDate);
 
-                        $.ajax({
-                        headers: {
-                            'X-CSRF-Token': csrfToken
-                        },
-						url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>'+'?start='+newDate+'&end='+newDate+'&title='+title+'&details='+detail,
-						type:'POST',
-						success:function()
-						{
-							// calendar.refetchEvents();
-							// alert("Added Event Successfully");
+							$.ajax({
+							headers: {
+								'X-CSRF-Token': csrfToken
+							},
+							url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>'+'?start='+newDate+'&end='+newDate+'&title='+title+'&details='+detail,
+							type:'POST',
+							success:function()
+							{
+								// calendar.refetchEvents();
+								// alert("Added Event Successfully");
+							}
+							})
+						 } else {
+							alert('Invalid date.');
 						}
-					    })
-					} else {
-						alert('Invalid date.');
 					}
-					}
+					
+
 				}
 			},
 
@@ -144,39 +166,29 @@
                 console.log(datePicker8);
                 console.log(selection);
                 console.log(urusetia);
+
+				$.ajax({
+					headers: {
+						'X-CSRF-Token': csrfToken
+					},
+					url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>
+					'+'?start='+datePicker7+'&end='+datePicker8+'&title='+tajuk+'&details='+detail,
+					type:'POST',
+					success:function()
+					{
+						// calendar.refetchEvents();
+						// alert("Added Event Successfully");
+					}
+				})
             });
         });
 
 	</script>
 
   <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
     Open modal
-  </button>
-
-	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
-	<div class="row">
-	    <?php if(!empty($posts)): foreach($posts as $post): ?>
-	    <div class="post-box">
-	        <div class="post-content">
-	            <div class="caption">
-	            	<?= $this->Html->link('Edit', ['action' => 'edit', $post->id]) ?>
-
-	            	<?= $this->Form->postLink('Delete',['action' => 'delete', $post->id],
-								    ['confirm' => 'Are you sure?'])?>
-	                <h4><a href="javascript:void(0);"><?php echo $post->title; ?></a></h4>
-	                <p><?php echo $post->description; ?></p>
-	                <p><?php echo $post->tarikh; ?></p>
-	            </div>
-	        </div>
-	    </div>
-	    <?php endforeach; else: ?>
-	    <p class="no-record">No post(s) found......</p>
-	    <?php endif; ?>
-	</div>
-
-	</div>
-
+  </button> -->
 
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
@@ -194,8 +206,12 @@
 		  <div class="container">
 			<h2></h2>
 				<div class="form-group">
-				<label for="text">Program</label>
-				<input type="text" class="form-control" id="tajuk" placeholder="Masukkan nama program" name="tajuk">
+					<label for="text">Program</label>
+					<input type="text" class="form-control" id="tajuk" placeholder="Masukkan nama program" name="tajuk">
+				</div>
+				<div class="form-group">
+					<label for="detail">Detail program</label>
+					<textarea class="form-control" rows="2" id="detail" name="text"></textarea>
 				</div>
 			<!-- Date Time picker -->
 				<div class="form-group">
@@ -204,7 +220,7 @@
 				<div class="input-group date" id="datetimepicker7" data-target-input="nearest">
 						<input type="text" id="tarikh-mula" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
 						<div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
-							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
 						</div>
 					</div>
 				</div>Hingga
@@ -212,15 +228,30 @@
 				<div class="input-group date" id="datetimepicker8" data-target-input="nearest">
 						<input type="text" id="tarikh-akhir" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
 						<div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
-							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
 						</div>
 					</div>
 			</div>
 			<script type="text/javascript">
 				$(function () {
-					$('#datetimepicker7').datetimepicker();
+					$('#datetimepicker7').datetimepicker({
+						format: "DD/MM/YYYY - hh:mm A",
+						icons: {
+							time: "far fa-clock",
+							date: "far fa-calendar-alt",
+							up: "fa fa-arrow-up",
+							down: "fa fa-arrow-down"
+						}
+					});
 					$('#datetimepicker8').datetimepicker({
-						useCurrent: false
+						useCurrent: false,
+						format: "DD/MM/YYYY - hh:mm A",
+						icons: {
+							time: "far fa-clock",
+							date: "far fa-calendar-alt",
+							up: "fa fa-arrow-up",
+							down: "fa fa-arrow-down"
+						}
 					});
 					$("#datetimepicker7").on("change.datetimepicker", function (e) {
 						$('#datetimepicker8').datetimepicker('minDate', e.date);

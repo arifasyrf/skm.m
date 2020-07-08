@@ -13,6 +13,7 @@
  */
 namespace App\View;
 
+use LilHermit\Bootstrap4\View\BootstrapViewTrait;
 use Cake\View\View;
 
 /**
@@ -24,6 +25,7 @@ use Cake\View\View;
  */
 class AppView extends View
 {
+    use BootstrapViewTrait;
 
     /**
      * Initialization hook method.
@@ -36,5 +38,8 @@ class AppView extends View
      */
     public function initialize()
     {
+        parent::initialize();
+        $this->initializeBootstrap();
     }
 }
+

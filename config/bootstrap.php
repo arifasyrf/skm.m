@@ -176,6 +176,8 @@ ServerRequest::addDetector('tablet', function ($request) {
     return $detector->isTablet();
 });
 
+$this->addPlugin('LilHermit/Bootstrap4', ['bootstrap' => true]);
+
 /*
  * Enable immutable time objects in the ORM.
  *

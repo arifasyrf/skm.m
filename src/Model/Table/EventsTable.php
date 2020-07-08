@@ -42,7 +42,6 @@ class EventsTable extends Table
 
         $this->belongsTo('EventTypes', [
             'foreignKey' => 'event_type_id',
-            'joinType' => 'INNER',
         ]);
     }
 
@@ -61,23 +60,19 @@ class EventsTable extends Table
         $validator
             ->scalar('title')
             ->maxLength('title', 255)
-            ->requirePresence('title', 'create')
-            ->notEmptyString('title');
+            ->allowEmptyString('title');
 
         $validator
             ->scalar('details')
-            ->requirePresence('details', 'create')
-            ->notEmptyString('details');
+            ->allowEmptyString('details');
 
         $validator
             ->dateTime('start')
-            ->requirePresence('start', 'create')
-            ->notEmptyDateTime('start');
+            ->allowEmptyDateTime('start');
 
         $validator
             ->dateTime('end')
-            ->requirePresence('end', 'create')
-            ->notEmptyDateTime('end');
+            ->allowEmptyDateTime('end');
 
         $validator
             ->boolean('all_day')
@@ -91,6 +86,16 @@ class EventsTable extends Table
         $validator
             ->boolean('active')
             ->notEmptyString('active');
+
+        $validator
+            ->scalar('unit_terlibat')
+            ->maxLength('unit_terlibat', 255)
+            ->allowEmptyString('unit_terlibat');
+
+        $validator
+            ->scalar('urusetia')
+            ->maxLength('urusetia', 255)
+            ->allowEmptyString('urusetia');
 
         return $validator;
     }
