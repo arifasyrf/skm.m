@@ -23,7 +23,10 @@
 	<h1>Perancangan Program</h1>
 	<br>
 
-	<div id='calendar'></div> <!-- Full calendar -->
+	<div class="container-sm">
+		  		<div id='calendar'></div> <!-- Full calendar -->
+	</div>
+
 	<br>
 	<?= $this->Html->link('Add New Event', ['action' => 'add'], array('class'=>'btn btn-outline-primary', 'escape' => false)) ?>
 	<div class="row">
@@ -56,6 +59,7 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 
 			editable: true,
+			contentHeight: 650,
 			headerToolbar: {
 				start: 'prevYear,prev,next,nextYear,today addEventButton',
 				center: 'title',
@@ -105,49 +109,22 @@
 				}
 			},
 
-			//events: 'load',
-			selectable: true,
-			//slectHelper: true,
-
-			select: function(start, end, allDay)
-			{
-				var title = prompt("Enter Event Title");
-				if(title)
-				{
-					var strat = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-					var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-
-                    console.log('whattt');
-					$.ajax({
-						url:"<? echo $this->Html->link('src\Template\Posts\insert.php') ?>",
-						type:"POST",
-						data:{title:title, start:start, end:end},
-						success:function()
-						{
-							calendar.fullcalendar('refetchEvents');
-							alert("Added Successfully");
-						}
-					})
-				}
-			},
-
-			editable:true,
-			eventResize:function(event)
-			{
-				var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-				var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-				var title = event.title;
-				var id = event.id;
-			$.ajax({
-				url:"update.php",
-				type:"POST",
-				data:{title:title, start:start, end:end, id:id},
-			success:function(){
-				calendar.fullCalendar('refetchEvents');
-				alert('Event Update');
-				}
-				})
-			},
+			events: [
+			    {
+			      title  : 'event1',
+			      start  : '2020-07-09'
+			    },
+			    {
+			      title  : 'event2',
+			      start  : '2020-07-05',
+			      end    : '2020-07-07'
+			    },
+			    {
+			      title  : 'event3',
+			      start  : '2010-01-09T12:30:00',
+			      allDay : false // will make the time show
+			    }
+			  ]
 
 		});
 		calendar.render();
@@ -156,30 +133,38 @@
         $( document ).ready(function() {
             $("#submit-modal").click(function(){
                 var tajuk = $('#tajuk').val();
-                var datePicker7 = $('#tarikh-mula').val();
-                var datePicker8 = $('#tarikh-akhir').val();
-                var selection = $('#sel1').val();
+                var detail = $('#detail').val();
+                var tarikh_mula = $('#tarikh-mula').val();
+                var tarikh_akhir = $('#tarikh-akhir').val();
+                var unit = $('#unit1').val();
                 var urusetia = $('#urusetia').val();
 
                 console.log(tajuk);
-                console.log(datePicker7);
-                console.log(datePicker8);
-                console.log(selection);
-                console.log(urusetia);
+                console.log(detail);
+                console.log(tarikh_mula);
+                console.log(tarikh_akhir);
+                console.log(unit);
+                console.log(urusetia);   
+
+
+				Event:[{
+					title: tajuk,
+					start: tarikh_mula,
+					end: tarikh_akhir,
+					allDay: true
+				}]
 
 				$.ajax({
 					headers: {
 						'X-CSRF-Token': csrfToken
 					},
-					url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>
-					'+'?start='+datePicker7+'&end='+datePicker8+'&title='+tajuk+'&details='+detail,
-					type:'POST',
-					success:function()
-					{
-						// calendar.refetchEvents();
-						// alert("Added Event Successfully");
-					}
+					url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>'+'?title='+tajuk+'&details='+detail+'&start='+tarikh_mula+'&end='+tarikh_akhir+'&unit_terlibat='+unit+'&urusetia='+urusetia,
+					type:'POST'
 				})
+				alert("Event added Successfully");
+				//eventSource.refetch();	
+				location.reload();				             
+
             });
         });
 
@@ -192,7 +177,7 @@
 
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
         <!-- Modal Header -->
@@ -214,17 +199,15 @@
 					<textarea class="form-control" rows="2" id="detail" name="text"></textarea>
 				</div>
 			<!-- Date Time picker -->
-				<div class="form-group">
-				<label for="text">Tarikh</label>
-				<br>Mula
+				<label for="text">Tarikh dan masa program </label>
+				<br>
+				<div class="form-inline">
 				<div class="input-group date" id="datetimepicker7" data-target-input="nearest">
 						<input type="text" id="tarikh-mula" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
 						<div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
 							<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
 						</div>
-					</div>
-				</div>Hingga
-				<div class="form-group">
+					</div> hingga 
 				<div class="input-group date" id="datetimepicker8" data-target-input="nearest">
 						<input type="text" id="tarikh-akhir" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
 						<div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
@@ -235,7 +218,7 @@
 			<script type="text/javascript">
 				$(function () {
 					$('#datetimepicker7').datetimepicker({
-						format: "DD/MM/YYYY - hh:mm A",
+						format: "YYYY-MM-DD hh:mm",
 						icons: {
 							time: "far fa-clock",
 							date: "far fa-calendar-alt",
@@ -245,7 +228,7 @@
 					});
 					$('#datetimepicker8').datetimepicker({
 						useCurrent: false,
-						format: "DD/MM/YYYY - hh:mm A",
+						format: "YYYY-MM-DD hh:mm", //YYYY-MM-DD HH:MI:SS
 						icons: {
 							time: "far fa-clock",
 							date: "far fa-calendar-alt",
@@ -276,10 +259,10 @@
 
 				});
 				</script> -->
-
+				<br>
 				<div class="form-group">
-					<label for="sel1">Unit terlibat:</label>
-					<select class="form-control" id="sel1" name="sellist1">
+					<label for="unit1">Unit terlibat</label>
+					<select class="form-control" id="unit1" name="sellist1">
 						<option>Pentadbiran</option>
 						<option>Pembangunan</option>
 						<option>Audit</option>
@@ -288,8 +271,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for="text">Urusetia</label>
-					<input type="text" class="form-control" id="urusetia" placeholder="Nama urusetia" name="tajuk">
+					<label for="urusetia">Urusetia</label>
+					<input type="text" class="form-control" id="urusetia" placeholder="Nama urusetia" name="urusetia">
 				</div>
 
 				<!-- <div class="form-group">

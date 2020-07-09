@@ -21,6 +21,15 @@
 			    <?= $this->Html->link('e-Calendar', ['controller' => 'posts','action' => 'kalendar'], array('class'=>'btn btn-outline-success')) ?>
 
 			</div>
+			<div>
+			<?php  if($this->getRequest()->getSession()->check()){
+		        $this->Html->link('Login', ['controller'=>'users', 'action'=>'login'], 
+		        array('class'=>'btn btn-success'));//your logout link
+		      }else{
+		        $this->Html->link('Logout', ['controller'=>'users', 'action'=>'logout'], 
+		        array('class'=>'btn btn-success'));//your login link
+		      }?>
+		     </div>
 
 
 			<div class="col-sm-4"></div>
