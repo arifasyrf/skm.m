@@ -58,6 +58,8 @@
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 
+			timeZone: 'local',
+			selectable: true,
 			editable: true,
 			contentHeight: 650,
 			headerToolbar: {
@@ -68,6 +70,16 @@
 			themeSystem: 'bootstrap',
 			//eventLimit: true,
 
+			 /*events:[
+			 	{
+			 		url:'<?= $this->Url->build(["controller" => "Posts","action" => "load"])?>'
+			 	}
+			 ],*/
+
+			 //events:'<?= $this->Url->build(["controller" => "Posts","action" => "load"])?>',
+			// events:'/skm.m/posts/load',
+			eventSources: ['/skm.m/posts/load' ], 
+
 			customButtons: {
 				addEventButton: {
 					text: 'Add new event',
@@ -77,54 +89,37 @@
 						// var dateStr = prompt('Enter a date in YYYY-MM-DD format');
 						// var date = new Date(dateStr + 'T00:00:00'); // will be in local time
 						// var newDate = date.toISOString().slice(0, 19).replace('T', ' ');
-						var title = 'Cuti hujung minggu';
-						var detail = 'Pi melancong pulau tioman';
+						// var title = 'Cuti hujung minggu';
+						// var detail = 'Pi melancong pulau tioman';
 
-						if (!isNaN(date.valueOf())) { // valid?
-							calendar.addEvent({
-							title: 'dynamic event',
-							start: date,
-							allDay: true
-							});
-							alert(newDate);
+						// if (!isNaN(date.valueOf())) { // valid?
+						// 	calendar.addEvent({
+						// 	title: 'dynamic event',
+						// 	start: date,
+						// 	allDay: true
+						// 	});
+						// 	alert(newDate);
 
-							$.ajax({
-							headers: {
-								'X-CSRF-Token': csrfToken
-							},
-							url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>'+'?start='+newDate+'&end='+newDate+'&title='+title+'&details='+detail,
-							type:'POST',
-							success:function()
-							{
-								// calendar.refetchEvents();
-								// alert("Added Event Successfully");
-							}
-							})
-						 } else {
-							alert('Invalid date.');
-						}
+						// 	$.ajax({
+						// 	headers: {
+						// 		'X-CSRF-Token': csrfToken
+						// 	},
+						// 	url:'<?= $this->Url->build(["controller" => "Posts", "action" => "saveEvent"])?>'+'?start='+newDate+'&end='+newDate+'&title='+title+'&details='+detail,
+						// 	type:'POST',
+						// 	success:function()
+						// 	{
+						// 		// calendar.refetchEvents();
+						// 		// alert("Added Event Successfully");
+						// 	}
+						// 	})
+						//  } else {
+						// 	alert('Invalid date.');
+						// }
 					}
 					
 
 				}
 			},
-
-			events: [
-			    {
-			      title  : 'event1',
-			      start  : '2020-07-09'
-			    },
-			    {
-			      title  : 'event2',
-			      start  : '2020-07-05',
-			      end    : '2020-07-07'
-			    },
-			    {
-			      title  : 'event3',
-			      start  : '2010-01-09T12:30:00',
-			      allDay : false // will make the time show
-			    }
-			  ]
 
 		});
 		calendar.render();
@@ -144,15 +139,7 @@
                 console.log(tarikh_mula);
                 console.log(tarikh_akhir);
                 console.log(unit);
-                console.log(urusetia);   
-
-
-				Event:[{
-					title: tajuk,
-					start: tarikh_mula,
-					end: tarikh_akhir,
-					allDay: true
-				}]
+                console.log(urusetia);
 
 				$.ajax({
 					headers: {

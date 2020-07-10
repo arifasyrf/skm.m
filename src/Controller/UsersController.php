@@ -73,7 +73,7 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
 
-        $this->Authentication->allowUnauthenticated(['login', 'logout' , 'add']);
+        $this->Authentication->allowUnauthenticated(['login', 'logout' , 'add', '/posts/load']);
     }
 
     public function logout()

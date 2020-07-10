@@ -71,15 +71,14 @@ class PostsController extends AppController
             foreach($result as $row)
             {
             $data[] = array(
-            'id'   => $row["id"],
-            'title'   => $row["title"],
-            'start'   => $row["start"],
-            'end'   => $row["end"],
-            );
+              'id'   => $row["id"],
+              'title'   => $row["title"],
+              'detail'   => $row["detail"],
+              'start'   => $row["start"],
+              'end'   => $row["end"]
+             );
             }
         }
-
-
         echo json_encode($data);
     }
 
