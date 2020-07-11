@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72f32b58f15f1be4abefaee37068b642",
+    "content-hash": "b0519dc769c675e742b409060fe5b401",
     "packages": [
         {
             "name": "aura/intl",
@@ -54,31 +54,31 @@
         },
         {
             "name": "cakephp/authentication",
-            "version": "1.0.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/authentication.git",
-                "reference": "876044375003f14e12cc00dce09f062da511cbfa"
+                "reference": "d7bce4b4629602d749421d0ce7aa2ba958b77f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/authentication/zipball/876044375003f14e12cc00dce09f062da511cbfa",
-                "reference": "876044375003f14e12cc00dce09f062da511cbfa",
+                "url": "https://api.github.com/repos/cakephp/authentication/zipball/d7bce4b4629602d749421d0ce7aa2ba958b77f82",
+                "reference": "d7bce4b4629602d749421d0ce7aa2ba958b77f82",
                 "shasum": ""
             },
             "require": {
-                "cakephp/core": "~3.5",
-                "psr/http-message": "~1.0",
+                "cakephp/core": "^3.7",
+                "psr/http-message": "^1.0",
                 "zendframework/zend-diactoros": "^1.4.0"
             },
             "require-dev": {
-                "cakephp/cakephp": "~3.5",
+                "cakephp/cakephp": "^3.7",
                 "cakephp/cakephp-codesniffer": "^3.0",
-                "firebase/php-jwt": "~4.0",
+                "firebase/php-jwt": "~5.0",
                 "phpunit/phpunit": "^5.7.14|^6.0"
             },
             "suggest": {
-                "cakephp/cakephp": "Install version >=3.5.0 to use \"CookieAuthenticator\".",
+                "cakephp/cakephp": "Install full core to use \"CookieAuthenticator\".",
                 "cakephp/orm": "To use \"OrmResolver\" (Not needed separately if using full CakePHP framework).",
                 "cakephp/utility": "Provides CakePHP security methods. Required for the JWT adapter and Legacy password hasher.",
                 "ext-ldap": "Make sure this php extension is installed and enabled on your system if you want to use the built-in LDAP adapter for \"LdapIdentifier\".",
@@ -108,7 +108,7 @@
                 "cakephp",
                 "middleware"
             ],
-            "time": "2018-09-12T09:50:35+00:00"
+            "time": "2020-01-25T02:55:02+00:00"
         },
         {
             "name": "cakephp/cakephp",
@@ -895,6 +895,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-02-04T09:41:09+00:00"
         },
         {
@@ -971,6 +985,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-02-24T13:10:00+00:00"
         },
         {
@@ -1313,6 +1341,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-02-03T13:51:17+00:00"
         },
         {
@@ -2004,6 +2046,12 @@
             "keywords": [
                 "Xdebug",
                 "performance"
+            ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                }
             ],
             "time": "2020-03-01T12:26:26+00:00"
         },
@@ -4056,6 +4104,20 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-02-14T07:42:58+00:00"
         },
         {
@@ -4105,6 +4167,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-02-07T20:06:44+00:00"
         },
         {
@@ -4444,5 +4520,6 @@
     "platform": {
         "php": ">=5.6"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

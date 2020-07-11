@@ -72,7 +72,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
         $service = new AuthenticationService();
         $service->setConfig([
-            'unauthenticatedRedirect' => '/users/login',
+            'unauthenticatedRedirect' => '/skm.m/users/login',
             'queryParam' => 'redirect',
         ]);
 
@@ -88,7 +88,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $service->loadAuthenticator('Authentication.Session');
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => $fields,
-            'loginUrl' => '/users/login'
+            'loginUrl' => '/skm.m/users/login'
         ]);
         //$service->loadAuthenticator('Authentication.HttpBasic');
 
