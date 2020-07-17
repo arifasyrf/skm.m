@@ -17,7 +17,7 @@ class BranchesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+    public function koperasi()
     {
         $branches = $this->paginate($this->Branches);
 

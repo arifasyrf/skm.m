@@ -50,7 +50,7 @@ class AppController extends Controller
 
         // in a controller beforeFilter or initialize
         // Make view and index not require a logged in user.
-        $this->Authentication->allowUnauthenticated(['view', 'index', '/skm.m/posts/kalendar']);
+        $this->Authentication->allowUnauthenticated(['view', 'index']);
 
         /* $this->loadComponent('Authentication.Authentication', [
             'logoutRedirect' => '/users/login'  // Default is false

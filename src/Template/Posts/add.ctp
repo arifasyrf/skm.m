@@ -6,6 +6,12 @@
 </head>
 
 <body>
+	<div class="container-fluid pt-3" max-width="100%">
+			<?= $this->Html->image('e_calendar.png');?>
+			<h4 class="text-center"> <small>Perancangan Program/Mesyuarat/Perjumpaan Koperasi</small> </h4>
+
+	
+	<?= $this->element('header') ?>
   <div class="container" max-width="100%">
 
 <!-- File: src/Template/Posts/add.ctp -->
@@ -20,7 +26,7 @@
 ?>
 
 </div>
-
+</div>
 
 </body>
 </html>

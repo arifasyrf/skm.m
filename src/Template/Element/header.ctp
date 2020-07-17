@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse" id="navb">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/skm.m/branches">e-Carian</a>
+        <a class="nav-link" href="/skm.m/branches/koperasi">e-Carian</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/skm.m/posts/kalendar">e-Calendar</a>

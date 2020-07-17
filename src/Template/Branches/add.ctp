@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?= $this->element('head') ?>
 </head>
 
 <?php
@@ -10,10 +11,18 @@
  * @var \App\Model\Entity\Branch $branch
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+
+<div class="container-fluid pt-3" max-width="100%">
+            <?= $this->Html->image('e_carian.png');?>
+    </div>
+
+
+<?= $this->element('header') ?>
+
+<nav class="large-1 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Branches'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Branches'), ['action' => 'koperasi']) ?></li>
     </ul>
 </nav>
 <div class="branches form large-9 medium-8 columns content">

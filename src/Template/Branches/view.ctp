@@ -11,12 +11,20 @@
  * @var \App\Model\Entity\Branch $branch
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+
+<div class="container-fluid pt-3" max-width="100%">
+            <?= $this->Html->image('e_carian.png');?>
+    </div>
+
+
+<?= $this->element('header') ?>
+
+<nav class="large-1 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Branch'), ['action' => 'edit', $branch->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Branch'), ['action' => 'delete', $branch->id], ['confirm' => __('Are you sure you want to delete # {0}?', $branch->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Branches'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('List Branches'), ['action' => 'koperasi']) ?> </li>
         <li><?= $this->Html->link(__('New Branch'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
