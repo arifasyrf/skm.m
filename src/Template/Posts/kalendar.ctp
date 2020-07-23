@@ -76,9 +76,27 @@
 			 	}
 			 ],*/
 
-			 //events:'<?= $this->Url->build(["controller" => "Posts","action" => "load"])?>',
+			events:'<?= $this->Url->build(["controller" => "Posts","action" => "load"])?>',
 			// events:'/skm.m/posts/load',
-			eventSources: ['/skm.m/posts/load' ], 
+			// eventSources: ['/skm.m/posts/update' ],
+			//eventSources: ['/skm.m/posts/load' ],
+
+			// events: [
+			// 		    {
+			// 		      title  : 'Meeting',
+			// 		      start  : '2020-07-15'
+			// 		    },
+			// 		    {
+			// 		      title  : 'Perhimpunan bulanan',
+			// 		      start  : '2020-07-24',
+			// 		      end    : '2020-07-24'
+			// 		    },
+			// 		    {
+			// 		      title  : 'Perjumpaan Koperasi',
+			// 		      start  : '2020-07-09T12:30:00',
+			// 		      allDay : false // will make the time show
+			// 		    }
+			// 		  ], 
 
 			customButtons: {
 				addEventButton: {

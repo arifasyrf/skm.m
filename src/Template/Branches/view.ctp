@@ -22,10 +22,10 @@
 <nav class="large-1 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Branch'), ['action' => 'edit', $branch->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Branch'), ['action' => 'delete', $branch->id], ['confirm' => __('Are you sure you want to delete # {0}?', $branch->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Branches'), ['action' => 'koperasi']) ?> </li>
-        <li><?= $this->Html->link(__('New Branch'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Edit koperasi'), ['action' => 'edit', $branch->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete koperasi'), ['action' => 'delete', $branch->id], ['confirm' => __('Are you sure you want to delete # {0}?', $branch->id)]) ?> </li>
+        <li><?= $this->Html->link(__('List koperasi'), ['action' => 'koperasi']) ?> </li>
+        <li><?= $this->Html->link(__('Tambah koperasi'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="branches view large-9 medium-8 columns content">
@@ -36,11 +36,11 @@
             <td><?= h($branch->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('RegisterNumber') ?></th>
+            <th scope="row"><?= __('Register Number') ?></th>
             <td><?= h($branch->registerNumber) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('FileNumber') ?></th>
+            <th scope="row"><?= __('File Number') ?></th>
             <td><?= h($branch->fileNumber) ?></td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
             <td><?= h($branch->address) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('phoneNumber') ?></th>
+            <th scope="row"><?= __('Phone Number') ?></th>
             <td><?= h($branch->phoneNumber) ?></td>
         </tr>
         <tr>
@@ -64,15 +64,15 @@
             <td><?= $this->Number->format($branch->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('RegisterDate') ?></th>
+            <th scope="row"><?= __('Register Date') ?></th>
             <td><?= h($branch->registerDate) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('TahunKewangan') ?></th>
+            <th scope="row"><?= __('Tahun Kewangan') ?></th>
             <td><?= h($branch->tahunKewangan) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('TahunBatal') ?></th>
+            <th scope="row"><?= __('Tahun Batal') ?></th>
             <td><?= h($branch->tahunBatal) ?></td>
         </tr>
         <tr>

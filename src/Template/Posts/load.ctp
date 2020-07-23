@@ -17,14 +17,12 @@ $result = $statement->fetchAll();
 foreach($result as $row)
 {
  $data[] = array(
-  'id'   => $row["id"],
+  //'id'   => $row["id"],
   'title'   => $row["title"],
-  'start'   => $row["start"],
-  'end'   => $row["end"]
+  'start'   => date('Y-m-d',strtotime($row["start"])),
+  'end'   => date('Y-m-d',strtotime($row["end"]))
  );
 }
-
 echo json_encode($data);
-
 
 ?>

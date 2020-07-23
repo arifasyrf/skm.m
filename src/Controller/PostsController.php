@@ -64,6 +64,24 @@ class PostsController extends AppController
 
     public function load(){
         $this->loadModel('Events');
+        $events = $this->Events->find();
+        foreach($events as $result){
+            foreach($result as $row)
+            {
+            $data[] = [
+              //'id'   => $row["id"],
+              'title'   => $row["title"],
+              'detail'   => $row["detail"],
+              'start'   => date('Y-m-d',strtotime($row["start"])),
+              'end'   => date('Y-m-d',strtotime($row["end"])),
+             ];
+                echo $data;
+            }
+        }
+    }
+
+    public function update(){
+        $this->loadModel('Events');
 
         $events = $this->Events->find();
 

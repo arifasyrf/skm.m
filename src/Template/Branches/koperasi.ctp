@@ -36,7 +36,7 @@ table tr td:first-child::before {
 <nav class="large-1 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Branch'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Tambah Koperasi'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="branches index large-11 medium-7 columns content">

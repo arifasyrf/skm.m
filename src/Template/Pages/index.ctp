@@ -20,7 +20,7 @@
 					<div class="card float-right shadow" style="width:300px">
 						<img class="card-img-top" src="img/search.png" alt="Card image" style="width:100%">
 						<div class="card-body">
-							<?= $this->Html->link('e-Carian', ['controller' => 'branches','action' => 'koperasi'], array('class'=>'btn btn-outline-primary btn-block stretched-link float-right')) ?>
+							<?= $this->Html->link('eCarian', ['controller' => 'branches','action' => 'koperasi'], array('class'=>'btn btn-outline-primary btn-block stretched-link float-right')) ?>
 						</div>
 					</div>
 				</div>
@@ -28,7 +28,7 @@
 	      			<div class="card shadow" style="width:300px">
 	      				<img class="card-img-top" src="img/calendar.png" alt="Card image" style="width:100%">
 	      				<div class="card-body">
-				    		<?= $this->Html->link('e-Calendar', ['controller' => 'posts','action' => 'kalendar'], array('class'=>'btn btn-outline-success btn-block stretched-link float-right')) ?>
+				    		<?= $this->Html->link('eCalendar', ['controller' => 'posts','action' => 'kalendar'], array('class'=>'btn btn-outline-success btn-block stretched-link float-right')) ?>
 				    	</div>
 					</div>
 				</div>

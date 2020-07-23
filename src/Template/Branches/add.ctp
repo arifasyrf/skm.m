@@ -22,13 +22,13 @@
 <nav class="large-1 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Branches'), ['action' => 'koperasi']) ?></li>
+        <li><?= $this->Html->link(__('List Koperasi'), ['action' => 'koperasi']) ?></li>
     </ul>
 </nav>
 <div class="branches form large-9 medium-8 columns content">
     <?= $this->Form->create($branch) ?>
     <fieldset>
-        <legend><?= __('Add Branch') ?></legend>
+        <legend><?= __('Tambah koperasi') ?></legend>
         <?php
             echo $this->Form->control('name');
             echo $this->Form->control('registerDate' , ['minYear' => 1920]);
