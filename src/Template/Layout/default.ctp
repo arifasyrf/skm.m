@@ -41,7 +41,7 @@ show up on all of your views, include it here -->
 
 <!-- Add a footer to each displayed page -->
 <div id="footer">
-<!-- <?= $this->element('footer') ?> -->
+<?= $this->element('footer') ?>
 </div>
 
 </body>
